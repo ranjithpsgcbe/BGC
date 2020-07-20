@@ -2,9 +2,9 @@ package com.cucumber.framework.PageObject;
 
 import com.aventstack.extentreports.Status;
 import com.cucumber.framework.configreader.ObjectRepo;
-import com.cucumber.framework.helper.Logger.LoggerHelper;
-import com.cucumber.framework.helper.Wait.WaitHelper;
-import com.cucumber.framework.helper.genericHelper.GenericHelper;
+import com.cucumber.framework.helper.LoggerHelper;
+import com.cucumber.framework.helper.WaitHelper;
+import com.cucumber.framework.helper.GenericHelper;
 import com.cucumber.listener.Reporter;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.JavascriptExecutor;
@@ -79,7 +79,7 @@ public class DeclarationPage {
 	@FindBy(css=".active > .menu-text")
 	WebElement ActiveTab;
 
-	@FindBy(css=".label")
+	@FindBy(xpath="//span[@class='label label-error']")
 	WebElement ErrorCount;
 
 	@FindBy(id="react-contact_info-offeree_email-alert")
@@ -117,9 +117,6 @@ public class DeclarationPage {
 		Reporter.addStepLog(Status.PASS+"  Declare8 : Yes" );
 		Declare9.click();
 		Reporter.addStepLog(Status.PASS+"  Declare9 : Yes" );
-
-
-
 	}
 
 	public void clickOntheacknowledgement() throws IOException {
@@ -142,25 +139,19 @@ public class DeclarationPage {
 	public void verifymandatoryInputMissing() throws InterruptedException {
 		log.info("verify mandatory Input Missing");
 		Thread.sleep(2000);
-		String activetab = ActiveTab.getText();
-		String counterror = ErrorCount.getText();
-		String Errormsg = ErrorMessage.getText();
+		String activetab = genericHelper.readValueFromElement(ActiveTab);
+		String counterror = genericHelper.readValueFromElement(ErrorCount);
+		String Errormsg = genericHelper.readValueFromElement(ErrorMessage);
 
 		log.info("Verify  "+activetab+"++++"+counterror+"++++"+Errormsg);
-		try {
-			Assert.assertEquals(activetab, "Contact Details");
-			Reporter.addStepLog(Status.PASS+"  Expected : Contact Details"+"Actual :"+activetab );
-		}catch (Exception e){
-			Reporter.addStepLog(Status.FAIL+"  Expected : Contact Details"+"Actual :"+activetab );
-		}
+		Reporter.addStepLog(Status.PASS+"  Error Active Tab : "+activetab );
+		Reporter.addStepLog(Status.PASS+"  Error Count : "+ counterror );
 		try {
 			Assert.assertEquals(Errormsg, "Oops, that doesn't seem like a valid email address");
 			Reporter.addStepLog(Status.PASS+"  Expected : Oops, that doesn't seem like a valid email address"+"Actual :"+Errormsg );
 		}catch (Exception e){
 			Reporter.addStepLog(Status.FAIL+"  Expected : Oops, that doesn't seem like a valid email address"+"Actual :"+Errormsg );
 			}
-
-
 	}
 
 
@@ -175,7 +166,7 @@ public class DeclarationPage {
 		log.info("click On Submit Button");
 		SubmitButton.click();
 		Reporter.addStepLog(Status.PASS+"  click On Submit Button" );
-		 Refid = getRefID_submit.getText();
+		 Refid = genericHelper.readValueFromElement(getRefID_submit);
 		genericHelper.takeScreenShot("SubmitPage");
 
 	}
@@ -190,6 +181,7 @@ public class DeclarationPage {
 
 	public void clickOnProcessingButton(){
 		log.info("click On Processing Button");
+		waitHelper.waitForElement(driver, ObjectRepo.reader.getExplicitWait(), ProcessingButton);
 		ProcessingButton.click();
 		Reporter.addStepLog(Status.PASS+"  click On Processing Button" );
 
@@ -198,10 +190,10 @@ public class DeclarationPage {
 
 	public void VerifyRefID() throws InterruptedException {
 		log.info("Verify RefID"+Refid);
+		waitHelper.waitForElement(driver, getRefID_Processing, ObjectRepo.reader.getExplicitWait());
 		WebElement element = getRefID_Processing;
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
-		Thread.sleep(300);
-		String Refid_Processing = getRefID_Processing.getText();
+		String Refid_Processing = genericHelper.readValueFromElement(getRefID_Processing);
 		try {
 			Assert.assertEquals(Refid, Refid_Processing);
 			Reporter.addStepLog(Status.PASS + "  Expected : " +Refid_Processing + "Actual :" + Refid);

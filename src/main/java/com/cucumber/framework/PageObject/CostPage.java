@@ -2,11 +2,13 @@ package com.cucumber.framework.PageObject;
 
 import com.aventstack.extentreports.Status;
 import com.cucumber.framework.configreader.ObjectRepo;
-import com.cucumber.framework.helper.Logger.LoggerHelper;
-import com.cucumber.framework.helper.Wait.WaitHelper;
-import com.cucumber.framework.helper.genericHelper.GenericHelper;
+import com.cucumber.framework.helper.LoggerHelper;
+import com.cucumber.framework.helper.TestBase;
+import com.cucumber.framework.helper.WaitHelper;
+import com.cucumber.framework.helper.GenericHelper;
 import com.cucumber.listener.Reporter;
 import org.apache.log4j.Logger;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -43,13 +45,19 @@ public class CostPage {
 		waitHelper = new WaitHelper(driver);
 		genericHelper = new GenericHelper(driver);
 
+
 	}
 
-	public void clickontheOficeRentalButton() {
+	public void clickontheOficeRentalButton() throws InterruptedException {
 		log.info("click On Rental Button");
-		waitHelper.waitForElement(driver, OficeRentalButton, ObjectRepo.reader.getExplicitWait());
-
-		OficeRentalButton.click();
+		waitHelper.waitForElement(driver, ObjectRepo.reader.getExplicitWait(), OficeRentalButton);
+		WebElement webElement = OficeRentalButton;
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", webElement);
+		try {
+			OficeRentalButton.click();
+		}catch (Exception e){
+		}
 		Reporter.addStepLog(Status.PASS+"  click On Rental Button");
 
 	}
@@ -70,6 +78,7 @@ public class CostPage {
 
 	public void enterRentalduration() {
 		log.info("enter Rental duration");
+		waitHelper.waitForElement(driver, RentalText, ObjectRepo.reader.getExplicitWait());
 		RentalText.sendKeys(ObjectRepo.reader.getCost_RentalText());
 		Reporter.addStepLog(Status.PASS+"  Enter Rental duration");
 

@@ -1,7 +1,7 @@
 
 package com.cucumber.framework.configreader;
 
-import com.cucumber.framework.configuration.browser.BrowserType;
+import com.cucumber.framework.browser.BrowserType;
 import com.cucumber.framework.utility.ResourceHelper;
 
 import java.util.Properties;
@@ -125,6 +125,10 @@ public class PropertyFileReader implements ConfigReader{
 
 	public String getCost_BillingCurrenctText() {
 		return prop.getProperty("Cost_BillingCurrenctText");
+	}
+
+	public String getExpectedUrl() {
+		return prop.getProperty("ExpectedURL");
 	}
 
 	

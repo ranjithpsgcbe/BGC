@@ -1,9 +1,10 @@
 package com.cucumber.framework.stepdefinition;
 
 import com.cucumber.framework.PageObject.EligiblePage;
-import com.cucumber.framework.helper.Logger.LoggerHelper;
-import com.cucumber.framework.helper.TestBase.TestBase;
+import com.cucumber.framework.helper.LoggerHelper;
+import com.cucumber.framework.helper.TestBase;
 import cucumber.api.java.en.And;
+import cucumber.api.java.en.Then;
 import org.apache.log4j.Logger;
 
 public class ElegibleSteps {
@@ -57,5 +58,12 @@ public class ElegibleSteps {
 		eligiblePage.ClickOnWarningMessage();
 
 	}
+
+	@Then("^Verify the InputValue \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\"$")
+	public void Verify_the_InputValue(String Value1,String Value2,String Value3,String Value4,String Value5) throws Throwable {
+		eligiblePage.VerifyInputValue(Value1,Value2,Value3,Value4,Value5);
+
+	}
+
 
 }

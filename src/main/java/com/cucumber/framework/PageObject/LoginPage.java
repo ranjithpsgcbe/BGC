@@ -2,9 +2,9 @@ package com.cucumber.framework.PageObject;
 
 import com.aventstack.extentreports.Status;
 import com.cucumber.framework.configreader.ObjectRepo;
-import com.cucumber.framework.helper.Logger.LoggerHelper;
-import com.cucumber.framework.helper.Wait.WaitHelper;
-import com.cucumber.framework.helper.genericHelper.GenericHelper;
+import com.cucumber.framework.helper.LoggerHelper;
+import com.cucumber.framework.helper.WaitHelper;
+import com.cucumber.framework.helper.GenericHelper;
 import com.cucumber.listener.Reporter;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -86,11 +86,6 @@ public class LoginPage {
 
 	}
 
-	public void selectRole() throws IOException {
-		//log.info("Select Role.."+email);
-		//Role_dropdown.sendKeys("Acceptor");
-
-	}
 
 	public void clickOnLoginButton() throws IOException {
 		log.info("click On Login Button");

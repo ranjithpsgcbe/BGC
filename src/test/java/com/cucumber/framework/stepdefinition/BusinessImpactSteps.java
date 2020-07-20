@@ -1,8 +1,8 @@
 package com.cucumber.framework.stepdefinition;
 
 import com.cucumber.framework.PageObject.BusinessImpactPage;
-import com.cucumber.framework.helper.Logger.LoggerHelper;
-import com.cucumber.framework.helper.TestBase.TestBase;
+import com.cucumber.framework.helper.LoggerHelper;
+import com.cucumber.framework.helper.TestBase;
 import cucumber.api.java.en.And;
 import org.apache.log4j.Logger;
 

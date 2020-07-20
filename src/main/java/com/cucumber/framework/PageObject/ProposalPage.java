@@ -2,26 +2,22 @@ package com.cucumber.framework.PageObject;
 
 import com.aventstack.extentreports.Status;
 import com.cucumber.framework.configreader.ObjectRepo;
-import com.cucumber.framework.helper.DropDown.DropDownHelper;
-import com.cucumber.framework.helper.Logger.LoggerHelper;
-import com.cucumber.framework.helper.Wait.WaitHelper;
+import com.cucumber.framework.helper.LoggerHelper;
+import com.cucumber.framework.helper.WaitHelper;
 import com.cucumber.listener.Reporter;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
 
 public class ProposalPage {
 
 	WebDriver driver;
 	private final Logger log = LoggerHelper.getLogger(ProposalPage.class);
 	WaitHelper waitHelper;
-	DropDownHelper dropDownHelper;
 
 	@FindBy(id = "react-project-title")
 	WebElement ProjectTitile;
@@ -51,7 +47,7 @@ public class ProposalPage {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 		waitHelper = new WaitHelper(driver);
-		//waitHelper.waitForElement(driver, catalogTextObj,ObjectRepo.reader.getExplicitWait());
+
 	}
 
 	public void enterProjectTitile() {

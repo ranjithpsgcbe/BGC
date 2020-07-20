@@ -10,9 +10,14 @@ import cucumber.api.junit.Cucumber;
 import java.io.File;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = { "classpath:featurefile/TestProducts.feature" }, strict = true, monochrome = true,glue = {
+@CucumberOptions(features = { "classpath:featurefile" },
+		strict = true,
+		monochrome = true,
+		tags = { "@Test1","@Test2","@Test3","@Test4" },
+		glue = {
 		"classpath:com.cucumber.framework.stepdefinition",
-		"classpath:com.cucumber.framework.helper" }, plugin = {"html:target/cucumber-html-report","pretty",
+		"classpath:com.cucumber.framework.helper" },
+		plugin = {"html:target/cucumber-html-report","pretty",
 		"com.cucumber.listener.ExtentCucumberFormatter:output/report.html","json:target/cucumber/cucumber.json"})
 public class TestProductsRunner extends AbstractTestNGCucumberTests {
 	@AfterClass

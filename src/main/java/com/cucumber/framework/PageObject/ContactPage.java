@@ -1,11 +1,10 @@
 package com.cucumber.framework.PageObject;
 
 import java.io.IOException;
-import java.util.List;
 
 import com.aventstack.extentreports.Status;
 import com.cucumber.framework.configreader.ObjectRepo;
-import com.cucumber.framework.helper.genericHelper.GenericHelper;
+import com.cucumber.framework.helper.GenericHelper;
 import com.cucumber.listener.Reporter;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -13,8 +12,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import com.cucumber.framework.helper.Logger.LoggerHelper;
-import com.cucumber.framework.helper.Wait.WaitHelper;
+import com.cucumber.framework.helper.LoggerHelper;
+import com.cucumber.framework.helper.WaitHelper;
 import org.testng.Assert;
 
 public class ContactPage {
@@ -105,9 +104,11 @@ public class ContactPage {
 
 	public void VerifyPrepopulatedAddress(String name, String jobtitle, String email) {
 
-		String name1 = getName.getAttribute("value");
-		String job = getJobTitle.getAttribute("value");
-		String mailid = getEmail.getAttribute("value");
+
+		String name1 = genericHelper.readValueFromInput(getName);
+		String job = genericHelper.readValueFromInput(getJobTitle);
+		String mailid = genericHelper.readValueFromInput(getEmail);
+
 		log.info("VerifyText+++++" + name1 + "+++++" + job + "+++++" + mailid);
 		try {
 			Assert.assertEquals(name, name1);

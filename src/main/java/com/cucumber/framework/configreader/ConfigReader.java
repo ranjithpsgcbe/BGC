@@ -1,6 +1,6 @@
 package com.cucumber.framework.configreader;
 
-import com.cucumber.framework.configuration.browser.BrowserType;
+import com.cucumber.framework.browser.BrowserType;
 
 public interface ConfigReader {
 	public String getprojectTitile();
@@ -28,4 +28,5 @@ public interface ConfigReader {
 	public String getCost_DescriptionText();
 	public String getCost_RentalText();
 	public String getCost_BillingCurrenctText();
+	public String getExpectedUrl();
 }
